@@ -56,22 +56,22 @@
     },
     {
       "Site Name": "Unsecured Frontier Database",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 88400000
     },
     {
       "Site Name": "Unsecured Frontier Receiver",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 75100000
     },
     {
       "Site Name": "Forgotten Frontier Quarantine Outpost",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 79400000
     },
     {
       "Site Name": "Forgotten Frontier Recursive Depot",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 92500000
     },
     {
@@ -96,22 +96,22 @@
     },
     {
       "Site Name": "Unsecured Frontier Digital Nexus",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 130100000
     },
     {
       "Site Name": "Unsecured Fronier Trinary Hub",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 91600000
     },
     {
       "Site Name": "Forgotten Fronier Conversion Module",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 146500000
     },
     {
       "Site Name": "Forgotten Fronier Evacuation Center",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 91600000
     },
     {
@@ -146,22 +146,22 @@
     },
     {
       "Site Name": "Unsecured Fronier Enclave Relay",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 344900000
     },
     {
       "Site Name": "Unsecured Frontier Server Bank",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 332900000
     },
     {
       "Site Name": "Forgotten Core Data Field",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 279000000
     },
     {
       "Site Name": "Forgotten Core Information Pen",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 272100000
     },
     {
@@ -186,22 +186,22 @@
     },
     {
       "Site Name": "Forgotten Perimeter Coronation Platform",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 12800000
     },
     {
       "Site Name": "Unsecured Perimeter Information Center",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 11800000
     },
     {
       "Site Name": "Unsecured Perimeter Amplifier",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 10200000
     },
     {
       "Site Name": "Forgotten Perimeter Power Array",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 9200000
     },
     {
@@ -226,22 +226,22 @@
     },
     {
       "Site Name": "Unsecured Perimeter Transponder Farm",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 26700000
     },
     {
       "Site Name": "Forgotten Perimete Habitation Coils",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 25400000
     },
     {
       "Site Name": "Unsecured Perimeter Comms Relay",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 20200000
     },
     {
       "Site Name": "Forgotten Perimeter Gateway",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 19100000
     },
     {
@@ -266,22 +266,22 @@
     },
     {
       "Site Name": "Unsecured Core Backup Array",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 688300000
     },
     {
       "Site Name": "Forgotten Core Circuitry Disassembler",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 657600000
     },
     {
       "Site Name": "Forgotten Core Assembly Hall",
-      "Category": "Combat Relic",
+      "Category": "Combat",
       "Value": 642500000
     },
     {
       "Site Name": "Unsecured Core Emergence",
-      "Category": "Combat Data",
+      "Category": "Combat",
       "Value": 627100000
     },
     {
