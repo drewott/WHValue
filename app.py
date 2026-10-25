@@ -13,7 +13,6 @@ def format_value(value):
 # Add background image to page
 image_path = Path(__file__).parent / "bison.png"
 image_data = base64.b64encode(image_path.read_bytes()).decode()
-
 st.markdown(
     f"""
     <style>
@@ -39,6 +38,7 @@ submit_sigs = st.button("Submit Sigs")
 if "site_list" not in st.session_state:
     st.session_state.site_list = None
 
+# Add the button functionality
 if submit_sigs:
     sites = parse_pasted_sigs(sigs_paste).reset_index(drop=True)
     sites.insert(0, "_row_id", range(len(sites)))
@@ -52,14 +52,15 @@ if st.session_state.site_list is not None:
     display_sites = sites.copy()
     display_sites["Value (millions)"] = display_sites["Value"] / 1_000_000
     display_sites = display_sites.drop(columns="Value")
-
+    st.write("Parsed columns:", sites.columns.tolist())
     edited = st.data_editor(
         display_sites,
         hide_index=True,
         num_rows="delete",
-        disabled=["_row_id", "Signature Code", "Site Type", "Site Name",
+        disabled=["_row_id", "Location", "Signature Code", "Site Type", "Site Name",
                   "Value (millions)"],
         column_order=[
+            "Location",
             "Signature Code",
             "Site Type",
             "Site Name",

@@ -8,27 +8,47 @@ SITE_DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "sites.json"
 
 def parse_pasted_sigs(pasted_sigs, site_data_path=SITE_DATA_PATH):
     rows = []
-
     for line in pasted_sigs.splitlines():
-        match = re.match(
-            r"^\s*(\S+)\s+(Ore|Wormhole|Combat|Data|Relic|Gas)\s+"
-            r"\S+\s+(.+?)\s+\d+\s*[mh]\s+ago\s*$",
-            line,
+        fields = line.split("\t")
+        if len(fields) < 5:
+            continue
+
+        signature_code, site_type, jsig = fields[:3]
+
+        match = re.fullmatch(
+            r"C[1-9][A-Za-z]?$",
+            jsig,
             re.IGNORECASE,
         )
 
-        if match:
-            rows.append({
-                "Signature Code": match.group(1),
-                "Site Type": match.group(2),
-                "Site Name": match.group(3).strip(),
-            })
+        if not match or site_type == "—":
+            continue
+        # Split the location into two sig code and the class designation
+        location = match
 
-    df = pd.DataFrame(rows)
+        # Combine the site names
+        site_name = " ".join(fields[3:-2])
+        if site_name == "—":
+            continue
+
+        # Fill the rows list
+        rows.append({
+            "Signature Code": signature_code,
+            "Site Type": site_type,
+            "Site Name": site_name,
+            "Location": location,
+        })
+
+    df = pd.DataFrame(
+        rows,
+        columns=["Signature Code", "Site Type", "Site Name", "Location"],
+    )
+
     if not Path(site_data_path).exists():
         raise FileNotFoundError(
             f"Looking for site data at: {Path(site_data_path).resolve()}"
         )
+
     with open(site_data_path, "r", encoding="utf-8") as file:
         sites = json.load(file)
 
@@ -43,8 +63,3 @@ def parse_pasted_sigs(pasted_sigs, site_data_path=SITE_DATA_PATH):
 
 def tally_site_values(site_list):
     return site_list["Value"].sum()
-
-def format_value(value):
-    if abs(value) >= 1_000_000_000:
-        return f"{value / 1_000_000_000:,.2f} billion"
-    return f"{value / 1_000_000:,.0f} million"
