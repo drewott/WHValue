@@ -15,16 +15,16 @@ def parse_pasted_sigs(pasted_sigs, site_data_path=SITE_DATA_PATH):
 
         signature_code, site_type, jsig = fields[:3]
 
-        match = re.fullmatch(
-            r"C[1-9][A-Za-z]?$",
-            jsig,
-            re.IGNORECASE,
-        )
-
+    match = re.match(
+        r"^\s*(\S+)\s+Cosmic\s+Anomaly\s+(Ore|Wormhole|Combat|Data|Relic|Gas)\s+Site\s+(.+?)(?=\s+\d+(?:\.\d+)?%)",
+        line, 
+        re.IGNORECASE
+    )
+        location = match.group(3)
         if not match or site_type == "—":
             continue
         # Split the location into two sig code and the class designation
-        location = match
+        
 
         # Combine the site names
         site_name = " ".join(fields[3:-2])
