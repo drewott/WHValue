@@ -7,23 +7,36 @@ from pathlib import Path
 SITE_DATA_PATH = Path(__file__).resolve().parents[1] / "data" / "sites.json"
 
 def parse_pasted_sigs(pasted_sigs, site_data_path=SITE_DATA_PATH):
+    # Takes a string of tab delineated lines containing
+    # Signature Code: ABC-123
+    # Site Type: Combat, Gas, Ore
+    # Site Name
+    # Location: JSIG and Class Designation
+    # 
+    # Parses the input string and returns
+    # a pandas dataframe containing the
+    # viable sites from the input paste
     rows = []
-
     for line in pasted_sigs.splitlines():
-        match = re.match(
-            r"^\s*(\S+)\s+(Ore|Wormhole|Combat|Data|Relic|Gas)\s+"
-            r"\S+\s+(.+?)\s+\d+\s*[mh]\s+ago\s*$",
-            line,
-            re.IGNORECASE,
+        # Split the string by tabs
+        fields = line.split("\t")
+        # Remove leading whitespace tab if present
+        if fields[0] == "":
+            fields = fields[1:]
+        # Pull the values into variables for each thing
+        signature_code, site_type, location, site_name = fields[:4]
+        match = re.search(
+            r"C[1-9][A-Za-z]?$",
+            location, 
+            re.IGNORECASE
         )
-
         if match:
             rows.append({
-                "Signature Code": match.group(1),
-                "Site Type": match.group(2),
-                "Site Name": match.group(3).strip(),
-            })
-
+                "Signature Code": signature_code,
+                "Site Type": site_type,
+                "Site Name": site_name,
+                "Location": match.group()
+        })
     df = pd.DataFrame(rows)
     if not Path(site_data_path).exists():
         raise FileNotFoundError(
@@ -42,4 +55,6 @@ def parse_pasted_sigs(pasted_sigs, site_data_path=SITE_DATA_PATH):
     return df
 
 def tally_site_values(site_list):
+    # Adds the values of all sites on site list
+    # Takes a list of sites returns an integer
     return site_list["Value"].sum()

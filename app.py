@@ -34,7 +34,6 @@ with combat_total_box:
 
 sigs_paste = st.text_area("Paste sites here.", height=300)
 submit_sigs = st.button("Submit Sigs")
-
 if "site_list" not in st.session_state:
     st.session_state.site_list = None
 
@@ -43,22 +42,12 @@ if submit_sigs:
     sites = parse_pasted_sigs(sigs_paste).reset_index(drop=True)
     sites.insert(0, "_row_id", range(len(sites)))
     st.session_state.site_list = sites
-    st.session_state.pop("sites_editor", None)
 
 if st.session_state.site_list is not None:
-    sites = st.session_state.site_list.copy()
-
-    # Keep original values for calculations; display a scaled value in the table.
-    display_sites = sites.copy()
-    display_sites["Value (millions)"] = display_sites["Value"] / 1_000_000
-    display_sites = display_sites.drop(columns="Value")
-    st.write("Parsed columns:", sites.columns.tolist())
-    edited = st.data_editor(
-        display_sites,
+    sites = st.session_state.site_list.copy()        
+    st.dataframe(
+        sites,
         hide_index=True,
-        num_rows="delete",
-        disabled=["_row_id", "Location", "Signature Code", "Site Type", "Site Name",
-                  "Value (millions)"],
         column_order=[
             "Location",
             "Signature Code",
@@ -71,16 +60,10 @@ if st.session_state.site_list is not None:
             "Value (millions)": st.column_config.NumberColumn(
                 "Value",
                 format="%.1f million",
-            ),
-        },
-        key="sites_editor",
-    )
-
-    # Keep only original rows whose IDs remain in the editor.
-    remaining_ids = set(edited["_row_id"])
-    sites = sites[sites["_row_id"].isin(remaining_ids)].reset_index(drop=True)
-    st.session_state.site_list = sites
-
+            )
+        },)
+#################################################
+    # Display tools re: total values shown
     total_value = tally_site_values(sites)
     st.write(f"Total Value: {total_value / 1_000_000_000:,.3f} billion")
 
@@ -89,7 +72,7 @@ if st.session_state.site_list is not None:
         .sum()
         .sort_values(ascending=False)
     )
-    # Add top boxes for the totals by type
+        # Add top boxes for the totals by type
     combat_value = format_value(category_totals.get("Combat", 0))
     with tbox1:
         st.metric(
